@@ -1,4 +1,5 @@
 import { createConnection } from 'net'
+import launchDataServer from './dataServer'
 import { createInterface } from 'readline'
 import fs from 'fs'
 
@@ -30,6 +31,7 @@ const handleCommand = (status?: string, args?: any) => {
 }
 
 const client = createConnection({ port: 4242 }, () => {
+  launchDataServer(6565)
   console.log('client connected.')
 })
 
@@ -38,7 +40,6 @@ client.on('data', (data) => {
   console.log('Message received:', message)
 
   const [status, ...args] = message.trim().split(' ')
-
   prompt(status, args)
 })
 

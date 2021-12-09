@@ -84,6 +84,7 @@ export function launch(port: number) {
         case 'RETR':
           const p = path.join(process.cwd(), args[0])
           if (fs.existsSync(p) && fs.statSync(p).isFile()) {
+            socket.write('226 sending file...')
             RETR(p)
             break
           }

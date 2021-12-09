@@ -3,7 +3,7 @@ import { createConnection } from 'net'
 
 const RETR = (path: string) => {
   console.log(path)
-  const socket = createConnection({ port: 6565 }, () => {
+  const socket = createConnection({ port: 6565, host: 'locahost' }, () => {
     console.log('download socket connected')
     socket.write(`RETR ${path}`)
   })
@@ -14,6 +14,7 @@ const RETR = (path: string) => {
       dest.pipe(socket)
       console.log('download finish closing socket ...')
     }
+    console.log('hello')
   })
 }
 
